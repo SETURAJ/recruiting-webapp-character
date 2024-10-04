@@ -1,6 +1,5 @@
-// src/components/AttributeControl/AttributeControl.js
 import React from 'react';
-import './attributecontrol.css'; // Ensure you have styles set for this component as well
+import './attributecontrol.css'; 
 
 function AttributeControl({ attributeName, attributeValue, onIncrement, onDecrement, calculateModifier }) {
   return (

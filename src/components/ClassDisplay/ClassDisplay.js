@@ -1,6 +1,5 @@
-// src/components/ClassDisplay/ClassDisplay.js
 import React, { useState } from 'react';
-import './ClassDisplay.css'; // Ensure you have basic styles defined
+import './ClassDisplay.css'; 
 
 function ClassDisplay({ className, classAttributes, currentAttributes }) {
   const [showDetails, setShowDetails] = useState(false);

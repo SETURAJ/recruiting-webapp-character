@@ -1,4 +1,3 @@
-// src/App.js
 import React, { useState } from 'react';
 import './App.css';
 import AttributeControl from './components/AttributeControl/attributecontrol.js';
