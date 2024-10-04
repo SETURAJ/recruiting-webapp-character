@@ -1,4 +1,3 @@
-  
 // src/App.js
 import React, { useState } from 'react';
 import './App.css';
@@ -16,24 +15,27 @@ function App() {
     Charisma: 10,
   });
 
+  const calculateModifier = (attributeValue) => {
+    return Math.floor((attributeValue - 10) / 2);
+  };
+
   const updateAttribute = (attributeName, delta) => {
-    const newAttributes = {
+    const potentialNewAttributes = {
       ...attributes,
       [attributeName]: attributes[attributeName] + delta
     };
-    const totalAttributes = Object.values(newAttributes).reduce((acc, cur) => acc + cur, 0);
-
-    if (totalAttributes > 70) {
-      alert("Cannot have more than 70 total points across all attributes.");
-    } else {
-      setAttributes(newAttributes);
+    const totalAttributes = Object.values(potentialNewAttributes).reduce((acc, cur) => acc + cur, 0);
+    if (totalAttributes <= 70) {
+      setAttributes(potentialNewAttributes);
+    }else{
+      alert("Total attribute points cannot exceed 70.");
     }
   };
 
   return (
     <div className="App">
       <header className="App-header">
-        <h1>PolicyMe Task</h1>
+        <h1>Character Attribute and Class Editor</h1>
       </header>
       <section className="App-section">
         {ATTRIBUTE_LIST.map(attribute => (
@@ -43,6 +45,7 @@ function App() {
             attributeValue={attributes[attribute]}
             onIncrement={() => updateAttribute(attribute, 1)}
             onDecrement={() => updateAttribute(attribute, -1)}
+            calculateModifier={calculateModifier}
           />
         ))}
       </section>
