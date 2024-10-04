@@ -1,22 +1,53 @@
-import { useState } from 'react';
+  
+// src/App.js
+import React, { useState } from 'react';
 import './App.css';
-import { ATTRIBUTE_LIST, CLASS_LIST, SKILL_LIST } from './consts.js';
-
+import AttributeControl from './components/AttributeControl/attributecontrol.js';
+import ClassDisplay from './components/ClassDisplay/ClassDisplay';
+import { ATTRIBUTE_LIST, CLASS_LIST } from './consts.js';
 
 function App() {
-  const [num, setNum] = useState(0);
+  const [attributes, setAttributes] = useState({
+    Strength: 10,
+    Dexterity: 10,
+    Constitution: 10,
+    Intelligence: 10,
+    Wisdom: 10,
+    Charisma: 10,
+  });
+
+  const updateAttribute = (attributeName, delta) => {
+    setAttributes(prevAttributes => ({
+      ...prevAttributes,
+      [attributeName]: Math.max(0, prevAttributes[attributeName] + delta)
+    }));
+  };
+
   return (
     <div className="App">
       <header className="App-header">
-        <h1>React Coding Exercise</h1>
+        <h1>PolicyMe Task</h1>
       </header>
       <section className="App-section">
-        <div>
-          Value:
-          {num}
-          <button>+</button>
-          <button>-</button>
-        </div>
+        {ATTRIBUTE_LIST.map(attribute => (
+          <AttributeControl
+            key={attribute}
+            attributeName={attribute}
+            attributeValue={attributes[attribute]}
+            onIncrement={() => updateAttribute(attribute, 1)}
+            onDecrement={() => updateAttribute(attribute, -1)}
+          />
+        ))}
+      </section>
+      <section className="Class-section">
+        {Object.entries(CLASS_LIST).map(([className, classAttributes]) => (
+          <ClassDisplay
+            key={className}
+            className={className}
+            classAttributes={classAttributes}
+            currentAttributes={attributes}
+          />
+        ))}
       </section>
     </div>
   );

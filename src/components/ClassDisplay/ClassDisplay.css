@@ -1,0 +1,12 @@
+/* src/components/ClassDisplay/ClassDisplay.css */
+.class-display {
+    border: 1px solid grey;
+    margin: 10px;
+    padding: 10px;
+    width: fit-content;
+  }
+  
+  .class-display.eligible {
+    border-color: red; /* Highlight eligible classes */
+  }
+  
