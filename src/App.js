@@ -17,10 +17,17 @@ function App() {
   });
 
   const updateAttribute = (attributeName, delta) => {
-    setAttributes(prevAttributes => ({
-      ...prevAttributes,
-      [attributeName]: Math.max(0, prevAttributes[attributeName] + delta)
-    }));
+    const newAttributes = {
+      ...attributes,
+      [attributeName]: attributes[attributeName] + delta
+    };
+    const totalAttributes = Object.values(newAttributes).reduce((acc, cur) => acc + cur, 0);
+
+    if (totalAttributes > 70) {
+      alert("Cannot have more than 70 total points across all attributes.");
+    } else {
+      setAttributes(newAttributes);
+    }
   };
 
   return (
